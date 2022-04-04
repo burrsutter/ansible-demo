@@ -8,7 +8,7 @@ To use:
 ```
 base64 -in $KUBECONFIG -okubeconfig-base64.txt
 ```
-1. docker config.json with read access to gcr.io/rox-se.  
+1. Optional: docker config.json with read access to gcr.io/rox-se
 ```
 base64 -in ~/.docker/config.json -odockerconfig-base64.txt
 ```  
@@ -24,21 +24,15 @@ kubectl -n stackrox get route central -o jsonpath="{.status.ingress[0].host}"
 
 ```
 KUBECONFIG_BASE64=TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2NpbmcgZWxpdC4gVml2YW11cyBmYWNpbGlzaXMgZWxlaWZlbmQgZWxlbWVudHVtLiBBbGlxdWFtIHVsbGFtY29ycGVyIHJpc3VzIGxvcmVtLCBuZWMgYXVjdG9yLgo=
-DOCKERCONFIG_BASE64=
+DOCKERCONFIG_BASE64=<optinonal>
 CENTRAL_PORT=443
 ADMIN_PASSWORD=ThisIsAnUnusuallyStrongPassphraseThatYou'llEndUpTypoing
 CENTRAL_ADDR=
 ORCHESTRATOR=openshift
-IMAGE_PULL_USER=
-IMAGE_PULL_PASSWORD=
+IMAGE_PULL_USER=<optinonal>
+IMAGE_PULL_PASSWORD=<optinonal>
 ```
 
-(optional:  If supplied, Auth0 will be configured
-
-```
-AUTH_CLIENT_ID=Ym9vLXlhaCBib3kgZGlkIHlvdSByZWFsbHkgZGVjb2RlIGFsbCB0aGVzZT8K
-AUTH_DOMAIN=abc123.auth0.com
-```
 
 Add the appropriate values to `config.env`.)
 
@@ -46,12 +40,5 @@ Add the appropriate values to `config.env`.)
 (optional:  If `CENTRAL_ADDR` is supplied, the playbook will skip installing Central and the cluster bundle.)
 (optional:  If you want to pull images from `stackrox.io` directly, omit IMAGE_REGISTRY and provide credentials for `stackrox.io`.)
 
-3. Invoke the `docker-compose.yml` with `docker-compose run ansible-demo-build`
+6. Invoke the `docker-compose.yml` with `docker-compose run ansible-demo-build`
 
-A few notes:
-
-* Auth0 integration is there but it's not going to work until we figure out the right approach for allowed callback URLs.
-* The process baseline is now locked for deployments that have rogue processes runing in them.
-* Not yet implemented:
-  - Slack notification
-  - There might be other things
