@@ -12,7 +12,7 @@ base64 -in $KUBECONFIG -okubeconfig-base64.txt
 ```
 base64 -in ~/.docker/config.json -odockerconfig-base64.txt
 ```  
-2. ADMIN_PASSWORD via 
+2. ADMIN_PASSWORD (Central) via
 ```
 kubectl -n stackrox get secret central-htpasswd -o go-template='{{index .data "password" | base64decode}}'
 ```
